@@ -1,0 +1,50 @@
+
+
+
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+  datasource:
+    url: ${spring.datasource.hikari.jdbc-url}
+    hikari:
+      jdbc-url: ${JDBC_PG_URL:jdbc:postgresql://127.0.0.1:5432/postgres}
+      username: ${JDBC_PG_USER:postgres}
+      password: ${JDBC_PG_PASSWORD:postgres}
+      minimum-idle: 2
+      maximum-pool-size: 100 #each microservice has dedicated DB
+      idle-timeout: 10000
+      max-lifetime: 240000 # because we have methods which runs more than 30 sec, e.g. migrations
+      connection-timeout: 5000
+      validation-timeout: 1000
+      connection-init-sql: SELECT 1 # check connection
+      initializationFailTimeout: 250
+      leak-detection-threshold: 200000 #to be sure we only take care of really leaks. And this parameter should be less than max lifetime
+      driver-class-name: org.postgresql.Driver
+      connection-test-query: SELECT 1
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: none
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL95Dialect
+        use_second_level_cache: false
+        show_sql: false
+        format_sql: true
+        use_sql_comments: true
+        physical_naming_strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        implicit_naming_strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
+        temp.use_jdbc_metadata_defaults: false
+        generate_statistics: true
+  jackson:
+    date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
+  liquibase:
+    change-log: classpath:changelog/all_migrations.xml
+server:
+  port: 8090
+
+
