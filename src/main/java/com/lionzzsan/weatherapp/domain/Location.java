@@ -1,14 +1,20 @@
 package com.lionzzsan.weatherapp.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.UUID;
-
+@Entity(name = "location")
 public class Location {
+    @Id
+    @Column(name = "id",unique = true)
+
     private UUID id;
-
+    @Column(name = "name")
     private String name;
-
+    @Column(name = "latitude")
     private double latitude;
-
+    @Column(name = "longitude")
     private double longitude;
 
     public void setId(UUID id) {

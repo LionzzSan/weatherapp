@@ -43,8 +43,8 @@ spring:
   jackson:
     date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
   liquibase:
-    change-log: classpath:changelog/all_migrations.xml
+    change-log: classpath:all_migrations.xml
 server:
-  port: 8090
+  port: 8091
 
 

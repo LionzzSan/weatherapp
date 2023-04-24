@@ -1,14 +1,24 @@
 package com.lionzzsan.weatherapp.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.time.OffsetDateTime;
+import java.util.UUID;
 
+@Entity(name = "forecasted_weather_data")
 public class ForecastedWeatherData {
+    @Id
+    @Column(name = "id",unique = true)
+
+    private UUID id;
+    @Column(name = "high_temp")
     private double highTemp;
-
+    @Column(name = "low_temp")
     private double lowTemp;
-
+    @Column(name = "precipitation")
     private double precipitation;
-
+    @Column(name = "forecasted_time",columnDefinition = "TIMESTAMP WITH TIME ZONE")
     private OffsetDateTime forecastedTime;
 
     public double getHighTemp() {

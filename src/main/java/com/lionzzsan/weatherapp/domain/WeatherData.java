@@ -1,21 +1,29 @@
 package com.lionzzsan.weatherapp.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
+@Entity(name = "weather")
+
 public class WeatherData {
+    @Id
+    @Column(name = "id",unique = true)
+
     private UUID id;
-
+    @Column(name = "location_id")
     private UUID locationId;
-
+    @Column(name = "temperature")
     private double temperature;
-
+    @Column(name = "humidity")
     private double humidity;
-
+    @Column(name = "wind_speed")
     private double windSpeed;
-
+    @Column(name = "precipitation")
     private double precipitation;
-
+    @Column(name = "observation_time",columnDefinition = "TIMESTAMP WITH TIME ZONE")
     private OffsetDateTime observationTime;
 
     public UUID getId() {
