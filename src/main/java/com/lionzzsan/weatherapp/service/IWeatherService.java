@@ -1,11 +1,14 @@
 package com.lionzzsan.weatherapp.service;
 
+import com.lionzzsan.weatherapp.domain.ForecastedWeatherData;
+import com.lionzzsan.weatherapp.domain.WeatherData;
+
 import java.util.UUID;
 
 public interface IWeatherService {
 
-    Object current(UUID locationId);
+    WeatherData current(UUID locationId);
 
-    Object forecast(UUID locationId);
+    ForecastedWeatherData forecast(UUID locationId);
 
 }

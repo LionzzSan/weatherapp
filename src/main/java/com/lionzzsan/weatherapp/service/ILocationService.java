@@ -8,9 +8,9 @@ public interface ILocationService {
 
     UUID add();
 
-    Iterable<Location> findAll();
+    Iterable<Location> findAll(int page, int pageSize);
 
-    UUID delete();
+    UUID delete(UUID id);
 
     UUID findOneByUser();
 
