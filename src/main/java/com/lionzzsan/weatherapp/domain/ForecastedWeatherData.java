@@ -19,6 +19,8 @@ public class ForecastedWeatherData {
     private double precipitation;
     @Column(name = "forecasted_time",columnDefinition = "TIMESTAMP WITH TIME ZONE")
     private OffsetDateTime forecastedTime;
+    @Column(name = "location_id")
+    private UUID locationId;
 
     public UUID getId() {
         return id;
@@ -58,5 +60,13 @@ public class ForecastedWeatherData {
 
     public void setForecastedTime(OffsetDateTime forecastedTime) {
         this.forecastedTime = forecastedTime;
+    }
+
+    public UUID getLocationId() {
+        return locationId;
+    }
+
+    public void setLocationId(UUID locationId) {
+        this.locationId = locationId;
     }
 }
