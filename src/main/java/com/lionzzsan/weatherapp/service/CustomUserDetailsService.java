@@ -34,6 +34,7 @@ public class CustomUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException(username);
         }
         user.setLocation(locationId);
+        this.repository.save(user);
         return user;
     }
 
