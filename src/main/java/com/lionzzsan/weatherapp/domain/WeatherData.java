@@ -7,11 +7,10 @@ import java.time.OffsetDateTime;
 import java.util.UUID;
 
 @Entity(name = "weather")
-
 public class WeatherData {
+
     @Id
     @Column(name = "id",unique = true)
-
     private UUID id;
     @Column(name = "location_id")
     private UUID locationId;

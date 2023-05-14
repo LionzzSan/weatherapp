@@ -8,7 +8,6 @@ import java.util.UUID;
 public class Location {
     @Id
     @Column(name = "id",unique = true)
-
     private UUID id;
     @Column(name = "name")
     private String name;

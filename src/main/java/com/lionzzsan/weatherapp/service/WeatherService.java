@@ -1,6 +1,6 @@
 package com.lionzzsan.weatherapp.service;
 
-import com.lionzzsan.weatherapp.dal.LocationDataRepository;
+import com.lionzzsan.weatherapp.dal.ForecastedWeatherDataRepository;
 import com.lionzzsan.weatherapp.dal.WeatherDataRepository;
 import com.lionzzsan.weatherapp.domain.ForecastedWeatherData;
 import com.lionzzsan.weatherapp.domain.WeatherData;
@@ -9,14 +9,15 @@ import org.springframework.stereotype.Service;
 import java.util.UUID;
 @Service
 public class WeatherService implements IWeatherService{
-    private final WeatherDataRepository weatherDataRepository;
 
-    public WeatherService(WeatherDataRepository weatherDataRepository, ForecastedWeatherData forecastedWeatherData) {
+    private final WeatherDataRepository weatherDataRepository;
+    private final ForecastedWeatherDataRepository forecastedWeatherDataRepository;
+
+    public WeatherService(WeatherDataRepository weatherDataRepository, ForecastedWeatherDataRepository forecastedWeatherDataRepository) {
         this.weatherDataRepository = weatherDataRepository;
-        this.forecastedWeatherData = forecastedWeatherData;
+        this.forecastedWeatherDataRepository = forecastedWeatherDataRepository;
     }
 
-    private final ForecastedWeatherData forecastedWeatherData;
     @Override
     public WeatherData current(UUID locationId) {
         return null;

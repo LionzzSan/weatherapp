@@ -10,7 +10,6 @@ import java.util.UUID;
 public class ForecastedWeatherData {
     @Id
     @Column(name = "id",unique = true)
-
     private UUID id;
     @Column(name = "high_temp")
     private double highTemp;
@@ -20,6 +19,14 @@ public class ForecastedWeatherData {
     private double precipitation;
     @Column(name = "forecasted_time",columnDefinition = "TIMESTAMP WITH TIME ZONE")
     private OffsetDateTime forecastedTime;
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
 
     public double getHighTemp() {
         return highTemp;
