@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public interface ForecastedWeatherDataRepository extends PagingAndSortingRepository<ForecastedWeatherData, UUID> {
 
-    List<ForecastedWeatherData> findForecastedWeatherDataByLocationIdAndStartDateLessThanEqualAndEndDateGreaterThanEqual(
+    List<ForecastedWeatherData> findAllByLocationIdAndStartDateLessThanEqualAndEndDateGreaterThanEqual(
             UUID locationId,
             OffsetDateTime endDate,
             OffsetDateTime startDate
