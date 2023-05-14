@@ -6,6 +6,9 @@ import com.lionzzsan.weatherapp.domain.ForecastedWeatherData;
 import com.lionzzsan.weatherapp.domain.WeatherData;
 import org.springframework.stereotype.Service;
 
+import java.time.OffsetDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.List;
 import java.util.UUID;
 @Service
 public class WeatherService implements IWeatherService{
@@ -19,12 +22,16 @@ public class WeatherService implements IWeatherService{
     }
 
     @Override
-    public WeatherData current(UUID locationId) {
-        return null;
+    public List<WeatherData> current(UUID locationId) {
+        return weatherDataRepository.findAllByLocationIdAndObservationTimeLessThanEqualAndObservationTimeGreaterThanEqual(
+                locationId,OffsetDateTime.now().truncatedTo(ChronoUnit.HOURS), OffsetDateTime.now().plusDays(1).truncatedTo(ChronoUnit.HOURS)
+        );
     }
 
     @Override
-    public ForecastedWeatherData forecast(UUID locationId) {
-        return null;
+    public List<ForecastedWeatherData> forecast(UUID locationId) {
+        return this.forecastedWeatherDataRepository.findAllByLocationIdAndForecastedTimeLessThanEqualAndForecastedTimeGreaterThanEqual(
+                locationId, OffsetDateTime.now(), OffsetDateTime.now().plusDays(7)
+        );
     }
 }

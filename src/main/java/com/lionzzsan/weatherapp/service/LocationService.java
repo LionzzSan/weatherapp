@@ -2,6 +2,7 @@ package com.lionzzsan.weatherapp.service;
 
 import com.lionzzsan.weatherapp.dal.LocationDataRepository;
 import com.lionzzsan.weatherapp.domain.Location;
+import com.lionzzsan.weatherapp.dto.SaveLocationDto;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +16,13 @@ public class LocationService implements ILocationService{
     }
 
     @Override
-    public UUID add() {
-        return null;
+    public UUID add(SaveLocationDto saveLocationDto) {
+        Location location = new Location();
+        location.setLatitude(saveLocationDto.getLatitude() );
+        location.setLongitude(saveLocationDto.getLatitude());
+        location.setName(saveLocationDto.getName());
+        location.setId(UUID.randomUUID());
+        return locationDataRepository.save(location).getId();
     }
 
     @Override

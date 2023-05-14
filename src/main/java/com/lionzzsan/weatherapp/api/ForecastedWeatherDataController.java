@@ -1,10 +1,9 @@
 package com.lionzzsan.weatherapp.api;
 
 import com.lionzzsan.weatherapp.domain.ForecastedWeatherData;
-import com.lionzzsan.weatherapp.domain.Location;
-import com.lionzzsan.weatherapp.domain.WeatherData;
+import com.lionzzsan.weatherapp.domain.User;
+import com.lionzzsan.weatherapp.service.CustomUserDetailsService;
 import com.lionzzsan.weatherapp.service.WeatherService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,20 +14,22 @@ import java.util.UUID;
 @RestController
 public class ForecastedWeatherDataController {
     private final WeatherService weatherService;
-
-    public ForecastedWeatherDataController(WeatherService weatherService) {
+    private final CustomUserDetailsService customUserDetailsService;
+    public ForecastedWeatherDataController(WeatherService weatherService, CustomUserDetailsService customUserDetailsService) {
         this.weatherService = weatherService;
+        this.customUserDetailsService = customUserDetailsService;
     }
 
     @GetMapping()
 
-    public ResponseEntity<ForecastedWeatherData> getForecastedWeatherData() {
-        return ResponseEntity.ok(weatherService.forecast(UUID.randomUUID()));
+    public ResponseEntity<List<ForecastedWeatherData>> getForecastedWeatherData() {
+       User user = (User) this.customUserDetailsService.loadUserByUsername("lionzz");
+        return ResponseEntity.ok(weatherService.forecast(user.getLocation()));
     }
     @GetMapping("/{uuid}")
 
 
-    public ResponseEntity<ForecastedWeatherData> getForecastedWeatherData(@PathVariable UUID uuid){
+    public ResponseEntity<List<ForecastedWeatherData>> getForecastedWeatherData(@PathVariable UUID uuid){
         return ResponseEntity.ok(weatherService.forecast(uuid));
     }
 }
