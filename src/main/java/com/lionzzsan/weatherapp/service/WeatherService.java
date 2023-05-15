@@ -10,6 +10,7 @@ import java.time.OffsetDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.UUID;
+
 @Service
 public class WeatherService implements IWeatherService{
 
@@ -30,7 +31,7 @@ public class WeatherService implements IWeatherService{
 
     @Override
     public List<ForecastedWeatherData> forecast(UUID locationId) {
-        return this.forecastedWeatherDataRepository.findAllByLocationIdAndForecastedTimeLessThanEqualAndForecastedTimeGreaterThanEqual(
+        return this.forecastedWeatherDataRepository.findByLocationIdAndBetweenDates(
                 locationId, OffsetDateTime.now(), OffsetDateTime.now().plusDays(7)
         );
     }

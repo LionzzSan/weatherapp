@@ -3,8 +3,11 @@ package com.lionzzsan.weatherapp.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.UUID;
-@Entity(name = "location")
+
+@Entity
+@Table(name = "location")
 public class Location {
     @Id
     @Column(name = "id",unique = true)

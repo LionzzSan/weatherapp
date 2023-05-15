@@ -28,14 +28,14 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
 
-    public UserDetails setUserLocation(String username, UUID locationId) throws UsernameNotFoundException {
-        User user = repository.findByUsername(username);
-        if (user == null) {
-            throw new UsernameNotFoundException(username);
-        }
+    public void setUserLocation(UUID userId, UUID locationId) throws UsernameNotFoundException {
+        User user = repository.findById(userId).orElseThrow(() -> new UsernameNotFoundException(userId.toString()));
         user.setLocation(locationId);
         this.repository.save(user);
-        return user;
     }
 
+    public void purgeUserLocation(User user) {
+        user.setLocation(null);
+        repository.save(user);
+    }
 }

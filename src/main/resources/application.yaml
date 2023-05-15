@@ -1,6 +1,3 @@
-
-
-
 spring:
   mvc:
     pathmatch:
@@ -45,6 +42,6 @@ spring:
   liquibase:
     change-log: classpath:all_migrations.xml
 server:
-  port: 8091
+  port: 8080
 
 
